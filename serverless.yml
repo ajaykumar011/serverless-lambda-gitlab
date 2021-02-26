@@ -1,11 +1,36 @@
+# service: gitlab-example
+# provider:
+#   name: aws
+#   runtime: nodejs14.x
+
+# functions:
+#   hello:
+#     handler: src/handler.hello
+#     events:
+#       - http: GET hello
+
+
 service: gitlab-example
 provider:
   name: aws
+  region: ${env:AWS_REGION}
   runtime: nodejs14.x
+
+plugins:
+  - serverless-offline
+  - serverless-jest-plugin
+  - serverless-stack-output # Allows us to output endpoint url to json file
 
 functions:
   hello:
-    handler: src/handler.hello
+    handler: src/handler.lambdaHandler
     events:
-      - http: GET hello
-      
+      - http:
+          path: hello
+          method: get
+          cors: true
+
+custom:
+  output:
+    handler: src/handler.lambdaHandler
+    file: stack.json
