@@ -17,7 +17,7 @@ provider:
   runtime: nodejs14.x
 
 plugins:
-  - serverless-offline
+  #- serverless-offline
   - serverless-jest-plugin
   - serverless-stack-output # Allows us to output endpoint url to json file
 
