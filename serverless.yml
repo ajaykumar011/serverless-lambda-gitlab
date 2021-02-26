@@ -16,11 +16,6 @@ provider:
   region: ${env:AWS_REGION}
   runtime: nodejs14.x
 
-plugins:
-  #- serverless-offline
-  - serverless-jest-plugin
-  - serverless-stack-output # Allows us to output endpoint url to json file
-
 functions:
   hello:
     handler: src/handler.lambdaHandler
@@ -29,8 +24,3 @@ functions:
           path: hello
           method: get
           cors: true
-
-custom:
-  output:
-    handler: src/handler.lambdaHandler
-    file: stack.json
